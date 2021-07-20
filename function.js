@@ -14,7 +14,8 @@ exports.handler = async function (context, event, callback) {
     }
     // Generate or use an existing Site ID/API Key pair from 
     // Customer.io > Integrations > Customer.io and
-    // add to Functions Settings > Environment Variables
+    // add to Functions Settings > Environment Variables in 
+    // the format SITEID:APIKEY
     let trackCreds = context.TRACK_CREDS
     if (trackCreds == null || trackCreds == '') {
         return callback('Set your track API credentials in environment variables');
