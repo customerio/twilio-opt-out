@@ -8,14 +8,14 @@ exports.handler = async function (context, event, callback) {
     // Generate an APP API Key from 
     // Customer.io > Integrations > Customer.io > App API and
     // add to Functions Settings > Environment Variables
-    let bearer = context.BEARER_TOKEN_DIMITRIS
+    let bearer = context.BEARER_TOKEN
     if (bearer == null || bearer == '') {
         return callback('Set your bearer token in environment variables');
     }
     // Generate or use an existing Site ID/API Key pair from 
     // Customer.io > Integrations > Customer.io and
     // add to Functions Settings > Environment Variables
-    let trackCreds = context.TRACK_CREDS_DIMITRIS
+    let trackCreds = context.TRACK_CREDS
     if (trackCreds == null || trackCreds == '') {
         return callback('Set your track API credentials in environment variables');
     }
