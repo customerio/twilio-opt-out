@@ -8,7 +8,6 @@ exports.handler = async function (context, event, callback) {
     // Generate an APP API Key from 
     // Customer.io > Integrations > Customer.io > App API and
     // add to Functions Settings > Environment Variables
-    // in the format SITEID:APIKEY
     let bearer = context.BEARER_TOKEN
     if (bearer == null || bearer == '') {
         return callback('Set your bearer token in environment variables');
