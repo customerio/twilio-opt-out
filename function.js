@@ -21,7 +21,7 @@ exports.handler = async function (context, event, callback) {
         return callback('Set your track API credentials in environment variables');
     }
 
-    let from = event.from || event.From;
+    let from = event.from;
     if (from == null || from == '') {
         return callback("The 'from' key must be set on the event object.");
     }
@@ -47,7 +47,7 @@ exports.handler = async function (context, event, callback) {
                             attribute: {
                                 field: 'phone',
                                 operator: 'eq',
-                                value: event.from
+                                value: from
                             }
                         }
                     ]
