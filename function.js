@@ -37,9 +37,16 @@ exports.handler = async function (context, event, callback) {
                 return retryCount * 1000; // time interval between retries
             }
         })
+
+        let urlRegion = ''
+        // Identifying customer.io workspace datacenter region
+        const { data: { region }} = await axios.get(`https://${trackCreds}@track.customer.io/api/v1/accounts/region`)
+        if (region == 'eu'){
+            urlRegion = '-eu'
+        }
         
         // Retrieving the ids of the customer.io profiles that have a 'phone' attribute equal to the phone number that triggered the Twilio flow.
-        let customer = await axios.post('https://beta-api.customer.io/v1/api/customers',
+        let customer = await axios.post(`https://api${urlRegion}.customer.io/v1/api/customers`,
             {
                 filter: {
                     and: [
@@ -68,7 +75,7 @@ exports.handler = async function (context, event, callback) {
             // Setting the 'sms_unsubscribe' attribute on the customer.io profiles to 'true'
             for (let customer_id of customer_ids){
                 await axios.put(
-                    `https://${trackCreds}@track.customer.io/api/v1/customers/${customer_id}`,
+                    `https://${trackCreds}@track${urlRegion}.customer.io/api/v1/customers/${customer_id}`,
                     {
                         sms_unsubscribe: true
                     }
